@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Завдання DOM</title>
+    <style>
+        .highlight {
+            color: rgb(21, 237, 13);
+        }
+    </style>
+</head>
+<body>
+    <h1 id="myHeading">Ласкаво просимо на мою сторінку!</h1>
+    <p id="myParagraph">Старий текст абзаца</p>
+    <button onclick="changeText()">Змінити текст абзаца</button>
+    <button onclick="addParagraph()">Додати новий абзац</button>
+    <button onclick="removeLastParagraph()">Видалити останній абзац</button>
+    <button onclick="changeBackground()">Змінити фон сторінки</button>
+    <p id="hoverParagraph">Наведи на мене курсор!</p>
+    <form onsubmit="return validateEmail()">
+        <input type="email" id="email" placeholder="Введіть email">
+        <button type="submit">Відправити</button>
+    </form>
+    <img id="myImage" src="Fon.jpg" width="200" alt="Зображення">
+    <button onclick="changeImage()">Змінити зображення</button>
+    <p id="myText">Цей текст стане зеленим</p>
+    <button onclick="addClass()">Додати клас</button>
+    <script>
+        const heading = document.getElementById("myHeading");
+        console.log(heading.textContent);
+        function changeText() {
+            document.getElementById("myParagraph").textContent = "Текст абзаца змінено!";
+        }
+        function addParagraph() {
+        const newP = document.createElement("p");
+        newP.textContent = "Це новий абзац, доданий за допомогою кнопки!";
+        newP.classList.add("dynamic");
+        document.body.appendChild(newP);
+}
+        function removeLastParagraph() {
+        const dynamicParagraphs = document.querySelectorAll("p.dynamic");
+        if (dynamicParagraphs.length > 0) {
+        dynamicParagraphs[dynamicParagraphs.length - 1].remove();
+    }
+}
+        function changeBackground() {
+            document.body.style.backgroundColor = "lightblue";
+        }
+        const hoverP = document.getElementById("hoverParagraph");
+        hoverP.addEventListener("mouseover", () => hoverP.style.color = "red");
+        hoverP.addEventListener("mouseout", () => hoverP.style.color = "black");
+        function validateEmail() {
+            const email = document.getElementById("email").value;
+            if (!email.includes("@")) {
+                alert("Введіть коректну електронну пошту");
+                return false; // не відправляти форму
+            }
+            alert("Дані надіслано!");
+            return true;
+        }
+        function changeImage() {
+            document.getElementById("myImage").src = "Fon_2.jpeg";
+        }
+        function addClass() {
+            document.getElementById("myText").classList.add("highlight");
+        }
+    </script>
+</body>
+</html>
